@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -14,26 +15,36 @@ export default {
           600: '#161E28',
           500: '#1C2530',
         },
+        light: {
+          900: '#F4F6F9',
+          800: '#FFFFFF',
+          700: '#EDF0F4',
+          600: '#E4E8EF',
+          500: '#D8DDE6',
+        },
         border: {
           DEFAULT: '#1E2D3D',
           subtle: '#162030',
           bright: '#2A3F55',
         },
-        acid: {
-          DEFAULT: '#00FF88',
-          dim: '#00CC6A',
-          faint: '#003322',
+        brand: {
+          DEFAULT: '#4a6997',
+          dim: '#3a5580',
+          faint: '#e8eef5',
+          'faint-dark': '#0d1a2a',
         },
         'red-threat': '#FF3A3A',
         'red-faint': '#2A0808',
+        'red-faint-light': '#FEF0F0',
         'amber-warn': '#FFAA00',
         'amber-faint': '#2A1E00',
+        'amber-faint-light': '#FFF8E6',
         text: {
           primary: '#E8F0F8',
           secondary: '#8BA4BF',
           muted: '#4A6278',
           code: '#7FDBCA',
-        }
+        },
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', '"Fira Code"', 'Consolas', 'monospace'],

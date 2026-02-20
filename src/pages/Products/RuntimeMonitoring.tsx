@@ -29,7 +29,6 @@ monitor = duelist.Monitor(
     on_violation=lambda v: alert_slack(v),
 )
 
-# Wrap any LLM call
 @monitor.watch
 def call_llm(prompt: str) -> str:
     return openai_client.chat.completions.create(
@@ -37,7 +36,6 @@ def call_llm(prompt: str) -> str:
         messages=[{"role": "user", "content": prompt}]
     ).choices[0].message.content
 
-# All calls now monitored in real-time
 response = call_llm(user_input)`
 
 export default function RuntimeMonitoring() {

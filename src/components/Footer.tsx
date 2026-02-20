@@ -1,95 +1,150 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
-export default function Footer() {
+type FormState = 'idle' | 'loading' | 'success'
+
+const INTERESTS = ['Red Teaming & Evaluation', 'Model Security', 'Code Scanning', 'Runtime Monitoring', 'Synthetic Data', 'Consulting / Enterprise', 'General Inquiry']
+
+const inputStyle = {
+  width: '100%',
+  background: 'var(--bg-800)',
+  border: '1px solid var(--border)',
+  padding: '10px 12px',
+  fontFamily: '"JetBrains Mono", monospace',
+  fontSize: '0.75rem',
+  color: 'var(--text-primary)',
+  outline: 'none',
+  transition: 'border-color 0.15s ease',
+}
+
+export default function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', company: '', role: '', message: '', interest: '' })
+  const [state, setState] = useState<FormState>('idle')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setState('loading')
+    setTimeout(() => setState('success'), 1200)
+  }
+
+  const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm(f => ({ ...f, [field]: e.target.value }))
+
   return (
-    <footer className="border-t border-border bg-bg-900">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-                <rect x="1" y="1" width="18" height="18" stroke="#00FF88" strokeWidth="1.5" />
-                <path d="M5 10L8 13L15 6" stroke="#00FF88" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span className="font-display text-sm font-bold tracking-wider">DUELIST</span>
+    <div className="pt-14">
+      <section className="py-20" style={{ borderBottom: '1px solid var(--border)' }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="section-label mb-4">Contact</p>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Request Access</h1>
+          <p className="text-base max-w-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            Duelist is available by request. Fill out the form and our team will follow up within one business day.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-3 gap-12">
+            <div className="space-y-8">
+              {[
+                { label: 'Sales', value: 'sales@duelist.dev', desc: 'Enterprise pricing, licensing, and procurement' },
+                { label: 'Security', value: 'security@duelist.dev', desc: 'Vulnerability disclosure and security questions' },
+                { label: 'Support', value: 'support@duelist.dev', desc: 'Technical support for existing customers' },
+              ].map(c => (
+                <div key={c.label}>
+                  <p className="section-label mb-1">{c.label}</p>
+                  <p className="font-mono text-sm mb-1" style={{ color: 'var(--brand)' }}>{c.value}</p>
+                  <p className="font-mono text-xs" style={{ color: 'var(--text-muted)' }}>{c.desc}</p>
+                </div>
+              ))}
+              <div className="pt-6" style={{ borderTop: '1px solid var(--border)' }}>
+                <p className="section-label mb-3">Compliance</p>
+                <div className="flex flex-wrap gap-2">
+                  {['SOC 2 Type II', 'ISO 27001', 'GDPR', 'CCPA'].map(c => (
+                    <span key={c} className="tag tag-acid">{c}</span>
+                  ))}
+                </div>
+              </div>
             </div>
-            <p className="font-mono text-xs text-text-muted leading-relaxed mb-4">
-              Adversarial AI testing and runtime security for production language models.
-            </p>
-            <div className="flex gap-3">
-              <a href="#" className="tag tag-acid">GitHub</a>
-              <a href="#" className="tag tag-blue">Discord</a>
+
+            <div className="lg:col-span-2">
+              {state === 'success' ? (
+                <div className="p-8 text-center" style={{ border: '1px solid var(--brand)', background: 'var(--brand-faint)' }}>
+                  <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4" style={{ border: '1px solid var(--brand)' }}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M4 10l4 4 8-8" stroke="var(--brand)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <h2 className="font-display text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Message received</h2>
+                  <p className="font-mono text-xs" style={{ color: 'var(--text-secondary)' }}>
+                    We'll follow up at <span style={{ color: 'var(--brand)' }}>{form.email}</span> within one business day.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {[
+                      { name: 'name', label: 'Name', type: 'text', placeholder: 'Jane Smith', required: true },
+                      { name: 'email', label: 'Work Email', type: 'email', placeholder: 'jane@company.com', required: true },
+                      { name: 'company', label: 'Company', type: 'text', placeholder: 'Acme Corp', required: true },
+                      { name: 'role', label: 'Role', type: 'text', placeholder: 'Security Engineer', required: false },
+                    ].map(field => (
+                      <div key={field.name}>
+                        <label className="block section-label mb-1.5">{field.label}</label>
+                        <input
+                          type={field.type}
+                          value={form[field.name as keyof typeof form]}
+                          onChange={update(field.name)}
+                          placeholder={field.placeholder}
+                          required={field.required}
+                          style={inputStyle}
+                          onFocus={e => (e.currentTarget.style.borderColor = 'var(--brand)')}
+                          onBlur={e => (e.currentTarget.style.borderColor = 'var(--border)')}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div>
+                    <label className="block section-label mb-1.5">Area of Interest</label>
+                    <select
+                      value={form.interest}
+                      onChange={update('interest')}
+                      style={inputStyle}
+                      onFocus={e => (e.currentTarget.style.borderColor = 'var(--brand)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = 'var(--border)')}
+                    >
+                      <option value="">Select...</option>
+                      {INTERESTS.map(i => <option key={i} value={i}>{i}</option>)}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block section-label mb-1.5">Message</label>
+                    <textarea
+                      value={form.message}
+                      onChange={update('message')}
+                      placeholder="Describe your use case, model stack, and key security concerns..."
+                      rows={5}
+                      style={{ ...inputStyle, resize: 'none' }}
+                      onFocus={e => (e.currentTarget.style.borderColor = 'var(--brand)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = 'var(--border)')}
+                    />
+                  </div>
+
+                  <button type="submit" disabled={state === 'loading'} className="btn-primary w-full justify-center py-3">
+                    {state === 'loading' ? 'Sending...' : 'Send Message'}
+                  </button>
+
+                  <p className="font-mono text-xs text-center" style={{ color: 'var(--text-muted)' }}>
+                    No spam. We respect your privacy. See our{' '}
+                    <a href="#" style={{ color: 'var(--brand)' }}>privacy policy</a>.
+                  </p>
+                </form>
+              )}
             </div>
-          </div>
-
-          <div>
-            <p className="section-label mb-4">Products</p>
-            <ul className="space-y-2">
-              {[
-                { label: 'Red Teaming', href: '/products/red-teaming' },
-                { label: 'Model Security', href: '/products/model-security' },
-                { label: 'Code Scanning', href: '/products/code-scanning' },
-                { label: 'Runtime Monitoring', href: '/products/runtime-monitoring' },
-                { label: 'Synthetic Data', href: '/products/synthetic-data' },
-                { label: 'Consulting', href: '/products/consulting' },
-              ].map(l => (
-                <li key={l.href}>
-                  <Link to={l.href} className="font-mono text-xs text-text-muted hover:text-text-secondary transition-colors">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="section-label mb-4">Platform</p>
-            <ul className="space-y-2">
-              {[
-                { name: 'Seed', desc: 'Threat Intel' },
-                { name: 'Forge', desc: 'Mutation Engine' },
-                { name: 'Nexus', desc: 'Risk Evaluation' },
-                { name: 'Blue', desc: 'Synthetic Data' },
-                { name: 'Resolve', desc: 'Remediation' },
-                { name: 'Signal', desc: 'Monitoring' },
-              ].map(l => (
-                <li key={l.name}>
-                  <span className="font-mono text-xs text-text-muted">
-                    <span className="text-acid-DEFAULT">{l.name}</span> — {l.desc}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="section-label mb-4">Company</p>
-            <ul className="space-y-2">
-              {[
-                { label: 'About', href: '/about' },
-                { label: 'Contact', href: '/contact' },
-                { label: 'Docs', href: '#' },
-                { label: 'Security', href: '#' },
-                { label: 'Privacy', href: '#' },
-              ].map(l => (
-                <li key={l.label}>
-                  <Link to={l.href} className="font-mono text-xs text-text-muted hover:text-text-secondary transition-colors">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
-
-        <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between gap-4">
-          <p className="font-mono text-xs text-text-muted">© 2025 Duelist. All rights reserved.</p>
-          <div className="flex gap-4">
-            <span className="tag tag-acid">SOC 2 Type II</span>
-            <span className="tag tag-blue">ISO 27001</span>
-          </div>
-        </div>
-      </div>
-    </footer>
+      </section>
+    </div>
   )
 }

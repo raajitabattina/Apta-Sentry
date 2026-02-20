@@ -20,7 +20,6 @@ const CODE = `import duelist
 
 client = duelist.Client(api_key="sk-...")
 
-# Generate security fingerprint
 fp = client.security.fingerprint(
     model="your-fine-tuned-model",
     baseline="openai/gpt-4o",
@@ -30,7 +29,6 @@ print(f"Jailbreak susceptibility: {fp.jailbreak_score:.1f}/10")
 print(f"Injection surface: {fp.injection_surface}")
 print(f"Deviation from baseline: {fp.delta:.2%}")
 
-# Full vulnerability scan
 scan = client.security.scan(
     model="your-fine-tuned-model",
     depth="comprehensive",
@@ -39,7 +37,6 @@ scan = client.security.scan(
 for vuln in scan.vulnerabilities:
     print(f"[{vuln.cvss_score:.1f}] {vuln.title}")
 
-# Generate and export patches
 patches = scan.remediate()
 patches.export("security_patches.json")`
 

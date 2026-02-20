@@ -3,60 +3,81 @@
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --bg-900: #080B0F;
+    --bg-800: #0D1117;
+    --bg-700: #111820;
+    --bg-600: #161E28;
+    --border: #1E2D3D;
+    --border-bright: #2A3F55;
+    --text-primary: #E8F0F8;
+    --text-secondary: #8BA4BF;
+    --text-muted: #4A6278;
+    --text-code: #7FDBCA;
+    --brand: #4a6997;
+    --brand-dim: #3a5580;
+    --brand-faint: #0d1a2a;
+    --scrollbar-track: #080B0F;
+    --scrollbar-thumb: #1E2D3D;
+    --scrollbar-thumb-hover: #2A3F55;
+    --grid-line: rgba(30,45,61,0.4);
+    --selection-bg: rgba(74,105,151,0.25);
+    --tag-red-bg: rgba(255,58,58,0.05);
+    --tag-amber-color: #FFAA00;
+    --tag-amber-bg: rgba(255,170,0,0.06);
   }
 
-  html {
-    scroll-behavior: smooth;
+  html.light {
+    --bg-900: #F4F6F9;
+    --bg-800: #FFFFFF;
+    --bg-700: #EDF0F4;
+    --bg-600: #E4E8EF;
+    --border: #C8D3E0;
+    --border-bright: #A8B8CC;
+    --text-primary: #0F1923;
+    --text-secondary: #3D5470;
+    --text-muted: #7A90A8;
+    --text-code: #2D6E63;
+    --brand: #4a6997;
+    --brand-dim: #3a5580;
+    --brand-faint: #e8eef5;
+    --scrollbar-track: #F4F6F9;
+    --scrollbar-thumb: #C8D3E0;
+    --scrollbar-thumb-hover: #A8B8CC;
+    --grid-line: rgba(74,105,151,0.1);
+    --selection-bg: rgba(74,105,151,0.15);
+    --tag-red-bg: #FEF0F0;
+    --tag-amber-color: #996600;
+    --tag-amber-bg: #FFF8E6;
   }
 
   body {
-    background-color: #080B0F;
-    color: #ffffff;
-    font-family: 'Inter', system-ui, sans-serif;
-    /* font-family: 'DM Sans', system-ui, sans-serif; */
+    background-color: var(--bg-900);
+    color: var(--text-primary);
+    font-family: 'DM Sans', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  ::selection {
-    background: rgba(0,255,136,0.2);
-    /* color: #00FF88; */
-    color: #4a6997;
-  }
+  ::selection { background: var(--selection-bg); color: var(--brand); }
 
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #080B0F;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #1E2D3D;
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #2A3F55;
-  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 }
 
 @layer components {
   .grid-bg {
     background-image:
-      linear-gradient(rgba(30,45,61,0.3) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30,45,61,0.3) 1px, transparent 1px);
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 40px 40px;
-  }
-
-  .code-line {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: #7FDBCA;
   }
 
   .tag {
@@ -73,37 +94,36 @@
   }
 
   .tag-acid {
-    border-color: rgba(0,255,136,0.3);
-    color: #5ec7ff;
-    background: rgba(0,255,136,0.05);
+    border-color: rgba(74,105,151,0.35);
+    color: var(--brand);
+    background: var(--brand-faint);
   }
 
   .tag-red {
     border-color: rgba(255,58,58,0.3);
     color: #FF3A3A;
-    background: rgba(255,58,58,0.05);
+    background: var(--tag-red-bg);
   }
 
   .tag-amber {
     border-color: rgba(255,170,0,0.3);
-    color: #FFAA00;
-    background: rgba(255,170,0,0.05);
+    color: var(--tag-amber-color);
+    background: var(--tag-amber-bg);
   }
 
   .tag-blue {
-    border-color: rgba(59,130,246,0.3);
-    color: #a0cbff;
-    background: rgba(59,130,246,0.05);
+    border-color: rgba(74,105,151,0.3);
+    color: #4a6997;
+    background: var(--brand-faint);
   }
 
   .btn-primary {
-    /* @apply inline-flex items-center justify-center px-5 py-2.5 bg-white text-black text-[15px] font-medium rounded-md transition-all hover:bg-gray-200; */
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: #5f80da;
-    color: #080B0F;
+    background: var(--brand);
+    color: #ffffff;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     font-weight: 600;
@@ -115,50 +135,52 @@
   }
 
   .btn-primary:hover {
-    background: #4b69bc;
+    background: var(--brand-dim);
     transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(0,255,136,0.25);
+    box-shadow: 0 4px 20px rgba(74,105,151,0.3);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
   }
 
   .btn-secondary {
-    /* @apply inline-flex items-center justify-center px-5 py-2.5 bg-[#1a1b1e] text-white text-[15px] font-medium rounded-md border border-gray-800 transition-all hover:bg-gray-800; */
-
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 9px 20px;
     background: transparent;
-    color: #E8F0F8;
+    color: var(--text-primary);
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     letter-spacing: 0.05em;
-    border: 1px solid #1E2D3D;
+    border: 1px solid var(--border);
     cursor: pointer;
     transition: all 0.15s ease;
     text-decoration: none;
   }
 
   .btn-secondary:hover {
-    border-color: #2A3F55;
-    background: rgba(30,45,61,0.4);
+    border-color: var(--border-bright);
+    background: rgba(74,105,151,0.06);
   }
 
   .card {
-    background: #0D1117;
-    border: 1px solid #1E2D3D;
+    background: var(--bg-800);
+    border: 1px solid var(--border);
     padding: 24px;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
   }
 
-  .card:hover {
-    border-color: #2A3F55;
-  }
+  .card:hover { border-color: var(--border-bright); }
 
   .section-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #4A6278;
+    color: var(--text-muted);
   }
 }

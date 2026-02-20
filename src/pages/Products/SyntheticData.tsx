@@ -20,7 +20,6 @@ const CODE = `import duelist
 
 client = duelist.Client(api_key="sk-...")
 
-# Generate adversarial training dataset
 dataset = client.data.generate(
     domain="financial_services",
     size=50_000,
@@ -29,17 +28,15 @@ dataset = client.data.generate(
         "jailbreak",
         "social_engineering",
     ],
-    format="dpo",  # chosen/rejected pairs
+    format="dpo",
     compliance=["FINRA", "SOX"],
 )
 
-# Push to Hugging Face Hub
 dataset.push_to_hub(
     "your-org/adversarial-finance-dpo",
     token=HF_TOKEN,
 )
 
-# Or export locally as Parquet
 dataset.to_parquet("./adversarial_training_data/")`
 
 export default function SyntheticData() {

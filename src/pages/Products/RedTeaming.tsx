@@ -20,7 +20,6 @@ const CODE = `import duelist
 
 client = duelist.Client(api_key="sk-...")
 
-# Initialize evaluation
 eval = client.evaluations.create(
     target="openai/gpt-4o",
     seed_corpus="owasp-llm-top10",
@@ -33,14 +32,12 @@ eval = client.evaluations.create(
     compliance=["OWASP_LLM", "NIST_AI_RMF"],
 )
 
-# Run and stream results
 for result in eval.run(stream=True):
     if result.severity in ["CRITICAL", "HIGH"]:
         print(f"[{result.severity}] {result.attack_id}")
         print(f"  Score: {result.score:.2f}")
         print(f"  Strategy: {result.strategy}")
 
-# Export compliance report
 report = eval.report(format="pdf")
 report.save("duelist_eval_report.pdf")`
 
