@@ -155,7 +155,7 @@ function Terminal() {
       <div className="p-4 space-y-1 min-h-[224px]">
         {TERMINAL_LINES.map((line, i) => (
           <div
-            key={i}
+            key={line.text}
             className={`${line.color} transition-opacity duration-300 ${visible.includes(i) ? 'opacity-100' : 'opacity-0'}`}
           >
             {line.text}
@@ -318,7 +318,7 @@ export default function Home() {
                 <p className="text-text-secondary text-sm leading-relaxed mb-4">{sys.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {sys.tags.map(t => (
-                    <span key={t} className={`tag ${colorClass(sys.color, 'tag')}`}>{t}</span>
+                    <span key={`${sys.name}-${t}`} className={`tag ${colorClass(sys.color, 'tag')}`}>{t}</span>
                   ))}
                 </div>
               </div>
@@ -384,7 +384,7 @@ export default function Home() {
                 <p className="text-text-muted text-xs leading-relaxed mb-4">{card.desc}</p>
                 <div className="flex flex-wrap gap-1">
                   {card.systems.map(s => (
-                    <span key={s} className="font-mono text-xs text-text-muted border border-border px-1.5 py-0.5">{s}</span>
+                    <span key={`${card.title}-${s}`} className="font-mono text-xs text-text-muted border border-border px-1.5 py-0.5">{s}</span>
                   ))}
                 </div>
               </Link>
