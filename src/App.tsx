@@ -13,17 +13,17 @@ import Consulting from './pages/Products/Consulting'
 
 export default function App() {
   return (
-    <HashRouter>
+    <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="products" element={<Products />} />
-          <Route path="Products/red-teaming" element={<RedTeaming />} />
-          <Route path="Products/model-security" element={<ModelSecurity />} />
-          <Route path="Products/code-scanning" element={<CodeScanning />} />
-          <Route path="Products/runtime-monitoring" element={<RuntimeMonitoring />} />
-          <Route path="Products/synthetic-data" element={<SyntheticData />} />
-          <Route path="Products/consulting" element={<Consulting />} />
+          <Route path="products/red-teaming" element={<RedTeaming />} />
+          <Route path="products/model-security" element={<ModelSecurity />} />
+          <Route path="products/code-scanning" element={<CodeScanning />} />
+          <Route path="products/runtime-monitoring" element={<RuntimeMonitoring />} />
+          <Route path="products/synthetic-data" element={<SyntheticData />} />
+          <Route path="products/consulting" element={<Consulting />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
         </Route>
@@ -31,4 +31,3 @@ export default function App() {
     </HashRouter>
   )
 }
-
