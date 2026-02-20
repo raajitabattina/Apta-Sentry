@@ -25,7 +25,7 @@ export default {
         border: {
           DEFAULT: '#1E2D3D',
           subtle: '#162030',
-          bright: '#2A3F55',
+          bright: '#3281d4',
         },
         brand: {
           DEFAULT: '#528de6',
@@ -41,8 +41,8 @@ export default {
         'amber-faint-light': '#FFF8E6',
         text: {
           primary: '#E8F0F8',
-          secondary: '#8BA4BF',
-          muted: '#4A6278',
+          secondary: '#487eb8',
+          muted: '#336291',
           code: '#7FDBCA',
         },
       },
