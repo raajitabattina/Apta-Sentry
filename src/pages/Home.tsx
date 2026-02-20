@@ -164,7 +164,7 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="relative min-h-screen flex items-center pt-14 grid-bg overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, color-mix(in srgb, var(--bg-900) 60%, transparent), var(--bg-900))' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'none' }} />
         <div className="relative max-w-7xl mx-auto px-6 py-24 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className={`transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
