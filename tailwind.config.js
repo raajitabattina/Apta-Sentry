@@ -28,8 +28,8 @@ export default {
           bright: '#2A3F55',
         },
         brand: {
-          DEFAULT: '#4a6997',
-          dim: '#3a5580',
+          DEFAULT: '#528de6',
+          dim: '#3b66aa',
           faint: '#e8eef5',
           'faint-dark': '#0d1a2a',
         },
