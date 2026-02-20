@@ -78,7 +78,7 @@ export default function Nav() {
             <rect x="1" y="1" width="18" height="18" stroke="var(--brand)" strokeWidth="1.5" />
             <path d="M5 10L8 13L15 6" stroke="var(--brand)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span className="font-display text-sm font-bold tracking-wider" style={{ color: 'var(--text-primary)' }}>DUELIST</span>
+          <span className="font-display text-sm font-bold tracking-wider" style={{ color: 'var(--text-primary)' }}>Apta Sentry</span>
           <span className="hidden sm:block font-mono text-xs" style={{ color: 'var(--text-muted)' }}>/ AI Security</span>
         </Link>
 
