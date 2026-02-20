@@ -163,7 +163,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center pt-14 grid-bg overflow-hidden">
+      <section className="relative min-h-screen flex items-center pt-14 grid-bg overflow-hidden" style={{ backgroundColor: 'var(--bg-900)' }}>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'none' }} />
         <div className="relative max-w-7xl mx-auto px-6 py-24 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">

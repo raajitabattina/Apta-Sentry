@@ -11,7 +11,7 @@ export default function Consulting() {
   return (
     <div className="pt-14">
       <section className="py-20 grid-bg relative overflow-hidden" style={{ borderBottom: '1px solid var(--border)' }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--bg-900), color-mix(in srgb, var(--bg-900) 90%, transparent))' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'none' }} />
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-6">
             <Link to="/products" className="font-mono text-xs transition-colors" style={{ color: 'var(--text-muted)' }}>Products</Link>
